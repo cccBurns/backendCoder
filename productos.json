@@ -1,0 +1,29 @@
+[
+	{
+		"id": 1,
+		"title": "RTX3060",
+		"description": "Placa de video con 12gb de Vram",
+		"price": 150000,
+		"thumbnail": "Sin imagen",
+		"code": "001",
+		"stock": 5
+	}
+  {
+		"id": 2,
+		"title": "RTX3070",
+		"description": "Placa de video con 8gb de Vram",
+		"price": 250000,
+		"thumbnail": "Sin imagen",
+		"code": "002",
+		"stock": 5
+	}
+  {
+		"id": 1,
+		"title": "RTX3080",
+		"description": "Placa de video con 10gb de Vram",
+		"price": 350000,
+		"thumbnail": "Sin imagen",
+		"code": "003",
+		"stock": 5
+	}
+]
