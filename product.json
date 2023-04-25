@@ -1,0 +1,90 @@
+[
+  {
+    "id": 1,
+    "title": "RTX3060",
+    "description": "Placa de video para 1080p",
+    "price": 100000,
+    "thumbnail": "../thumbnail1.png",
+    "code": "001",
+    "stock": "10",
+    "status": true,
+    "category": "nvidia"
+  },
+  {
+    "id": 2,
+    "title": "RTX3060ti",
+    "description": "Placa de video para 1080p",
+    "price": 125000,
+    "thumbnail": "../thumbnail2.png",
+    "code": "002",
+    "stock": "10",
+    "status": true,
+    "category": "nvidia"
+  },
+  {
+    "id": 3,
+    "title": "RTX3070",
+    "description": "Placa de video para 1440",
+    "price": 200000,
+    "thumbnail": "../thumbnail3.png",
+    "code": "003",
+    "stock": "10",
+    "status": true,
+    "category": "nvidia"
+  },
+  {
+    "id": 4,
+    "title": "RTX3070ti",
+    "description": "Placa de video para 1440",
+    "price": 250000,
+    "thumbnail": "../thumbnail4.png",
+    "code": "004",
+    "stock": "10",
+    "status": true,
+    "category": "nvidia"
+  },
+  {
+    "id": 5,
+    "title": "RTX3080",
+    "description": "Placa de video para 4k",
+    "price": 300000,
+    "thumbnail": "../thumbnail5.png",
+    "code": "005",
+    "stock": "10",
+    "status": true,
+    "category": "nvidia"
+  },
+  {
+    "id": 6,
+    "title": "RX6700",
+    "description": "Placa de video para 1080",
+    "price": 150000,
+    "thumbnail": "../thumbnail6.png",
+    "code": "006",
+    "stock": "10",
+    "status": true,
+    "category": "amd"
+  },
+  {
+    "id": 7,
+    "title": "RX6800",
+    "description": "Placa de video para 4k",
+    "price": 270000,
+    "thumbnail": "../thumbnail7.png",
+    "code": "007",
+    "stock": "10",
+    "status": true,
+    "category": "amd"
+  },
+  {
+    "id": 8,
+    "title": "RX6800xt",
+    "description": "Placa de video para 4k",
+    "price": 300000,
+    "thumbnail": "../thumbnail8.png",
+    "code": "008",
+    "stock": "10",
+    "status": true,
+    "category": "amd"
+  }
+]
