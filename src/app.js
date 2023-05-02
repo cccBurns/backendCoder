@@ -10,5 +10,26 @@ const app = express();
 app.use(express.json())
 app.use('/api/products', productRouter)
 app.use('/api/carts', cartRouter)
+app.use('/home', viewRouter)
+app.use('/realtimeproducts', realtimeProdRouter)
 
-app.listen(port, () =>{console.log(`Server escuchando en http://localhost:${port}`)})
+
+
+app.engine('handlebars', handlebars.engine())
+app.set('views', __dirname + '/views')
+app.set('view engine', 'handlebars')
+
+
+
+const serverHttp = app.listen(port, ()=>{
+    console.log(`Server Up ${port}`)
+})
+
+
+socketServer.on('connection', socketClient =>{
+    socketClient.on('productList', pList =>{
+        socketServer.emit(pList)
+    })
+})
+
+//app.listen(port, () =>{console.log(`Server escuchando en http://localhost:${port}`)})
