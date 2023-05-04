@@ -1,47 +1,100 @@
 import { Router } from "express";
+import ProductManager from "../controller/productManager.js";
+
 const productManager = new ProductManager('./product.json')
 
 const router = Router();
 
-
-
-//OBTENER PRODUCTOS  /api/products
-router.get('/', async(req, res)=> {
+//OBTENER PRODUCTOS  
+router.get('/', async(req, res)=>{
     try {
-        const limit = parseInt(req.query.limit)
-        const products = productManager.getProduct();
-        const productLimit = limit ? products.slice(0, limit) : products;
-        res.json(productLimit)
+
+        const limit = req.query.limit
+        const product = productManager.getProduct();
+        const limitedProduct = limit ? product.slice(0, limit) : productManager.getProduct();
+
+        res.json(limitedProduct)
 
     } catch (error) {
-        console.log(error)
-        res.status(501).send('No fue posible obtener los productos')
+        console.error(error)
+        res.status(404).send('Error al obtener productos')
+    }
+
+})
+
+//OBTENER 1 PRODUCTO EN PARTICULAR 
+router.get('/:pid', async(req, res) =>{
+    try{
+
+        const id = parseInt(req.params.pid);
+        const productId = productManager.getProductById(id)
+        if(!productId) {
+            res.status(501).send(`No se encontro el producto con el id ${id}`)
+            return;
+        }
+
+        res.json(productId)
+
+    } catch(error) {
+        console.error(error)
+        res.status(501).send('Producto no encontrado')
+    }
+})
+//UPDATE PRODUCTO  
+router.post('/', async(req, res)=> {
+    try{
+        
+        const {title, description, price, thumbnail, code, stock, category} = req.body;
+        productManager.addProduct(title, description, price, thumbnail, code, stock, category);
+        res.status(200).send('Agregado correctamente')
+    } catch {
+        res.status(404).send('Error al agregar el producto a la lista')
     }
 })
 
-//OBTENER 1 PRODUCTO EN PARTICULAR /api/product/
-router.get('/:pid', async(req, res) =>{
+router.put('/:pid', async(req, res) =>{
     try {
-        const id = parseInt(req.params.pid)
-        const product = productManager.getProductById(id)
-        if(!product){
-            res.status(404).send(`No se encuentra el producto ${id}`)
-            return;
-        }
-        res.send(product);
+        const pid = parseInt(req.params.pid)
+        const nuevoDato = req.body
+        const product = productManager.updateProduct(pid, nuevoDato)
+        res.json(product)
+    } catch {
+        res.status(404).send('Error')
+    }
 
-    } 
-    catch (error){
-            console.log(error)
-        res.status(501).send('No se puede acceder intente mas tarde')
+})
+//DELETE PRODUCTO 
+router.delete('/:id', async(req, res) => {
+    try {
+        const id = parseInt(req.params.id);
+
+        const productDelete = productManager.deleteProduct(id);
+        if(!productDelete){
+            res.status(200).send('Eliminado correctamente')
+        } else {
+            res.status(404).send(`Error al eliminar el id ${id}`)
         }
+        
+
+
+    }catch (error) {
+        console.log(error)
+        res.status(501).send(`No se pudo eliminar el producto ${id} intente nuevamente `)
+    }
 })
 
-//DELETE PRODUCTO  /api/delete
-router.get('/:pid', async(req, res) =>{
+
+
+
+
+
+export default router;
+
+ 
+/* app.delete('/api/producto/:id', async(req, res) =>{
     try {
         const id = parseInt(req.params.pid)
-        const product_delete = productManager.deleteProduct(id)
+        const product_delete = ProductManager.deleteProduct(id)
         console.log('product_delete',product_delete);
         if(!product_delete){
             res.status(404).send(`No se encuentra el producto ${id}`)
@@ -54,14 +107,14 @@ router.get('/:pid', async(req, res) =>{
             console.log(error)
         res.status(501).send('No se puede acceder, intente mas tarde')
         }
-})
+}) */
 
-//UPDATE PRODUCTO  api/update/
-router.get('/:pid', async(req, res)=> {
+
+/* router.get('/:pid', async(req, res)=> {
     try {
         const id = parseInt(req.params.pid)
         
-        const products_update = productManager.updateProduct(id, updatedProduct)
+        const products_update = ProductManager.updateProduct(id, updatedProduct)
         //console.log(products_update);return;
         
         res.json(products_update)
@@ -70,8 +123,4 @@ router.get('/:pid', async(req, res)=> {
         console.log(error)
         res.status(501).send('No fue posible actualizar los productos')
     }
-})
-
-
-
-export default router;
+}) */

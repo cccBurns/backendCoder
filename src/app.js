@@ -1,8 +1,13 @@
 import express from 'express';
-import productRouter from './routers/products';
-import cartRouter from './routers/cart.js'
-import ProductManager from './controller/productManager';
-const productManager = new ProductManager('./product.json');
+import productRouter from './routers/products.js';
+import cartRouter from './routers/cart.js';
+
+import __dirname from './utils.js';
+import { Server} from 'socket.io';
+
+import viewRouter from './routers/views.router.js';
+import realtimeProdRouter from './routers/realTimePro.js';
+import handlebars from 'express-handlebars';
 
 const port = 8080;
 const app = express();
@@ -25,6 +30,7 @@ const serverHttp = app.listen(port, ()=>{
     console.log(`Server Up ${port}`)
 })
 
+const socketServer  = new Server(serverHttp)
 
 socketServer.on('connection', socketClient =>{
     socketClient.on('productList', pList =>{
